@@ -2,16 +2,12 @@ import {
   Controller,
   Get,
   Post,
-  Patch,
-  Put,
-  Delete,
   Param,
   Query,
   Body,
-  Headers,
-  Ip,
   ParseIntPipe,
   DefaultValuePipe,
+  Patch,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
@@ -24,10 +20,8 @@ export class UsersController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(typeof id);
-    console.log(limit);
-    console.log(page);
-    return `You sent a get request to users endpoint with id: ${id}`;
+    console.log(getUsersParamDto);
+    return `You sent a get request to users endpoint.`;
   }
 
   @Post()
@@ -35,4 +29,7 @@ export class UsersController {
     console.log(typeof createUserDto);
     return 'You sent a post request to users endpoint';
   }
+
+  @Patch()
+  public patchUser(@Body() body){}
 }
