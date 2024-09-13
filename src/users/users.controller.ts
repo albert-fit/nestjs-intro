@@ -10,31 +10,29 @@ import {
   Body,
   Headers,
   Ip,
+  ParseIntPipe,
+  DefaultValuePipe,
+  ValidationPipe,
 } from '@nestjs/common';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
-  @Get('/:id/:optional?') // you can use any keyword for optional as long as you place a ? at the end.
+  @Get('/:id?') // you can use any keyword for optional as long as you place a ? at the end.
   public getUsers(
-    @Param('id') id: any,
-    params: any,
-    @Query('limit') limit: any,
-    @Query('offset') offset: any,
+    @Param('id', ParseIntPipe) id: number | undefined,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
+    console.log(typeof id);
     console.log(limit);
-    console.log(offset);
+    console.log(page);
     return `You sent a get request to users endpoint with id: ${id}`;
   }
 
   @Post()
-  public createUsers(
-    @Body() body: any,
-    @Headers() headers: any,
-    @Ip() ip: any,
-  ) {
-    console.log(headers);
-    console.log(body);
-    console.log(ip);
+  public createUsers(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
+    console.log(createUserDto);
     return 'You sent a post request to users endpoint';
   }
 }

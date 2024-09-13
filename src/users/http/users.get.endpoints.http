@@ -1,2 +1,1 @@
-GET http://localhost:3000/users/1234/test?limit=10&offset=0
-
+GET http://localhost:3000/users/1234
