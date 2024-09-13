@@ -14,12 +14,13 @@ import {
   DefaultValuePipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-users-param.dto';
 
 @Controller('users')
 export class UsersController {
   @Get('/:id?') // you can use any keyword for optional as long as you place a ? at the end.
   public getUsers(
-    @Param('id', ParseIntPipe) id: number | undefined,
+    @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
