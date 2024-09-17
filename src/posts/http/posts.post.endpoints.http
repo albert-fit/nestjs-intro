@@ -1,15 +1,14 @@
 POST http://localhost:3000/posts
 Content-Type: application/json
 
-{
-    "title": "test",
-    "postType": "story",
-    "slug": "/1234",
+{   "title": "New with NestJS",
+    "postType": "post",
+    "slug": "new-with-nestjs",
     "status": "draft",
     "content": "Once upon a time...",
-    "schema": "A schema",
+    "schema": "{\r\n \"@context\": \"https:\/\/schema.org\",\r\n \"@type\": \"Person\",\r\n }",
     "featuredImageUrl": "https://example.com/image.jpg",
     "publishedOn": "2022-10-01T00:00:00Z",
-    "tags": ["tag1", "tag2"],
-    "metaOptions": { "meta1": "some meta" }
+    "tags": ["nestjs", "typescript"],
+    "metaOptions": [{ "key": "testKey", "value": 20 }]
 }
