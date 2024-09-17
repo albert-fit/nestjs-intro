@@ -6,21 +6,20 @@ import {
   IsOptional,
   IsObject,
 } from 'class-validator';
-
+import { postType } from '../enums/postType.enum';
+import { postStatus } from '../enums/postStatus.enum';
 export class CreatePostDto {
   @IsString()
   title: string;
 
-  @IsString()
-  @IsEnum(['post', 'page', 'story', 'series'])
-  postType: string;
+  @IsEnum(postType)
+  postType: postType;
 
   @IsString()
   slug: string;
 
-  @IsString()
-  @IsEnum(['draft', 'scheduled', 'review', 'published'])
-  status: string;
+  @IsEnum(postStatus)
+  status: postStatus;
 
   @IsString()
   @IsOptional()
@@ -41,5 +40,5 @@ export class CreatePostDto {
   tags: string[];
 
   @IsObject()
-  metaOptions: [{ key: string }];
+  metaOptions: [{ key: 'sidebarEnabled'; value: true }];
 }
