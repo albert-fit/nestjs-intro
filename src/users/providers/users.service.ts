@@ -1,6 +1,9 @@
 import { Injectable, forwardRef, Inject } from '@nestjs/common';
 import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import { AuthService } from '../../auth/providers/auth.service';
+import { Repository } from 'typeorm';
+import { User } from '../users.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 /**
  * Class to connect to Users table and perform business operations.
@@ -14,6 +17,12 @@ export class UsersService {
   constructor(
     @Inject(forwardRef(() => AuthService))
     private readonly authService: AuthService,
+
+    /**
+     * Inject the Users Repository to perform CRUD operations.
+     */
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
   ) {}
 
   /**
@@ -45,6 +54,7 @@ export class UsersService {
    * The method to get a user by id from the database.
    */
   public findOneById(id: string) {
+    console.log('id', id);
     return {
       firstName: 'John',
       email: 'john@doe.com',

@@ -175,12 +175,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, usersRepository: Repository<User>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/users/providers/users.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/users/providers/users.service.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -204,6 +204,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>usersRepository</td>
+                                                  
+                                                        <td>
+                                                                    <code>Repository&lt;User&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -247,8 +259,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/users/providers/users.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/users/providers/users.service.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -342,8 +354,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/users/providers/users.service.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/users/providers/users.service.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -400,6 +412,9 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, forwardRef, Inject } from &#x27;@nestjs/common&#x27;;
 import { GetUsersParamDto } from &#x27;../dtos/get-users-param.dto&#x27;;
 import { AuthService } from &#x27;../../auth/providers/auth.service&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
+import { User } from &#x27;../users.entity&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 
 /**
  * Class to connect to Users table and perform business operations.
@@ -413,6 +428,12 @@ export class UsersService {
   constructor(
     @Inject(forwardRef(() &#x3D;&gt; AuthService))
     private readonly authService: AuthService,
+
+    /**
+     * Inject the Users Repository to perform CRUD operations.
+     */
+    @InjectRepository(User)
+    private usersRepository: Repository&lt;User&gt;,
   ) {}
 
   /**
@@ -444,6 +465,7 @@ export class UsersService {
    * The method to get a user by id from the database.
    */
   public findOneById(id: string) {
+    console.log(&#x27;id&#x27;, id);
     return {
       firstName: &#x27;John&#x27;,
       email: &#x27;john@doe.com&#x27;,
