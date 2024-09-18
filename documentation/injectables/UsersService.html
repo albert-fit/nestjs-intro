@@ -126,6 +126,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Class to connect to Users table and perform business operations.</p>
+
+            </p>
 
 
 
@@ -173,12 +180,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/users/providers/users.service.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/users/providers/users.service.ts:10</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inject the Auth Service circular dependency to check if a user is authenticated.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -238,14 +247,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/users/providers/users.service.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/users/providers/users.service.ts:22</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>The method to get all users from the database.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -331,14 +342,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/users/providers/users.service.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/users/providers/users.service.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>The method to get a user by id from the database.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -388,23 +401,33 @@
 import { GetUsersParamDto } from &#x27;../dtos/get-users-param.dto&#x27;;
 import { AuthService } from &#x27;../../auth/providers/auth.service&#x27;;
 
+/**
+ * Class to connect to Users table and perform business operations.
+ */
+
 @Injectable()
 export class UsersService {
+  /**
+   * Inject the Auth Service circular dependency to check if a user is authenticated.
+   */
   constructor(
-    //Injecting the AuthService class
     @Inject(forwardRef(() &#x3D;&gt; AuthService))
     private readonly authService: AuthService,
   ) {}
 
-  //Find all users
+  /**
+   * The method to get all users from the database.
+   */
   public findAll(
     getUsersParamDto: GetUsersParamDto,
     limit: number,
     page: number,
   ) {
-
     const isAuth &#x3D; this.authService.isAuth();
     console.log(&#x27;isAuth&#x27;, isAuth);
+    console.log(&#x27;getUsersParamDto&#x27;, getUsersParamDto);
+    console.log(&#x27;limit&#x27;, limit);
+    console.log(&#x27;page&#x27;, page);
     return [
       {
         firstName: &#x27;John&#x27;,
@@ -417,8 +440,9 @@ export class UsersService {
     ];
   }
 
-  //Find a user by id
-
+  /**
+   * The method to get a user by id from the database.
+   */
   public findOneById(id: string) {
     return {
       firstName: &#x27;John&#x27;,

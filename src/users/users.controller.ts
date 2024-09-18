@@ -18,9 +18,14 @@ import { ApiTags, ApiQuery, ApiOperation, ApiResponse } from '@nestjs/swagger';
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  //Injecting Users Service to the controller
+  /**
+   * Inject the Users Service to access the business logic.
+   */
   constructor(private readonly usersService: UsersService) {}
 
+  /**
+   * The method to get users from the database.
+   */
   @Get('/:id?') // you can use any keyword for optional as long as you place a ? at the end.
   @ApiOperation({ summary: 'Fetches a list of users.' })
   @ApiResponse({
@@ -42,6 +47,10 @@ export class UsersController {
       'The position of the page number that you want the API to return',
     example: 1,
   })
+
+  /**
+   * The method to get all users from the database.
+   */
   public getUsers(
     @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -50,12 +59,18 @@ export class UsersController {
     return this.usersService.findAll(getUsersParamDto, limit, page);
   }
 
+  /**
+   * The method to create a user in the database.
+   */
   @Post()
   public createUsers(@Body() createUserDto: CreateUserDto) {
     console.log(typeof createUserDto);
     return 'You sent a post request to users endpoint';
   }
 
+  /**
+   * The method to amend user details in the database.
+   */
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;
