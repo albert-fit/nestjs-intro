@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Patch } from '@nestjs/common';
 import { PostsService } from './providers/posts.service';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { PatchPostDto } from './dtos/patch-post.dto';
+
 @ApiTags('posts')
 @Controller('posts')
 export class PostsController {
@@ -18,14 +20,24 @@ export class PostsController {
     return this.postsService.findAll(userId);
   }
 
-  @Post()
-  @ApiOperation({ summary: 'Creates a new post.' })
+  @ApiOperation({ summary: 'This api endpoint creates a new blog post.' })
   @ApiResponse({
     status: 201,
-    description: 'The post has been successfully created.',
+    description: 'You get a 201 response if your post is created successfully.',
   })
+  @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
     console.log(typeof createPostDto);
     return this.postsService.createPost(createPostDto);
+  }
+
+  @ApiOperation({ summary: 'This api endpoint updates an existing blog post.' })
+  @ApiResponse({
+    status: 202,
+    description: 'You get a 200 response if your post is updated successfully.',
+  })
+  @Patch()
+  public updatePost(@Body() patchPostsDto: PatchPostDto) {
+    console.log(patchPostsDto);
   }
 }
