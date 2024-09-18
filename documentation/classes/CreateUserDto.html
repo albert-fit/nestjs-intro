@@ -149,6 +149,7 @@
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#email" >email</a>
                             </li>
                             <li>
@@ -166,6 +167,7 @@
                                 <a href="#lastName" >lastName</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -199,6 +201,7 @@
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>email</b></span>
                         <a href="#email"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -215,13 +218,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsEmail()<br />@IsNotEmpty()<br />
+                            @IsEmail()<br />@IsNotEmpty()<br />@MaxLength(96)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/users/dtos/create-user.dto.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/users/dtos/create-user.dto.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -316,6 +319,7 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>password</b></span>
                         <a href="#password"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -332,13 +336,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsString()<br />@MinLength(8)<br />@Matches(/^(?&#x3D;.*[A-Z])(?&#x3D;.*[!@#$&amp;*])(?&#x3D;.*[0-9]).*$/, {message: &#x27;Minimum eight characters, at least one letter, one number and one special character&#x27;})<br />@IsNotEmpty()<br />
+                            @IsString()<br />@MinLength(8)<br />@Matches(/^(?&#x3D;.*[A-Z])(?&#x3D;.*[!@#$&amp;*])(?&#x3D;.*[0-9]).*$/, {message: &#x27;Minimum eight characters, at least one letter, one number and one special character&#x27;})<br />@IsNotEmpty()<br />@MaxLength(96)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/users/dtos/create-user.dto.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/users/dtos/create-user.dto.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -382,6 +386,7 @@ export class CreateUserDto {
 
   @IsEmail()
   @IsNotEmpty()
+  @MaxLength(96)
   email: string;
 
   @IsString()
@@ -391,6 +396,7 @@ export class CreateUserDto {
       &#x27;Minimum eight characters, at least one letter, one number and one special character&#x27;,
   })
   @IsNotEmpty()
+  @MaxLength(96)
   password: string;
 }
 </code></pre>
