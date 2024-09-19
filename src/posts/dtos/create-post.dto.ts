@@ -10,6 +10,7 @@ import {
   IsISO8601,
   MinLength,
   ValidateNested,
+  MaxLength,
 } from 'class-validator';
 import { postType } from '../enums/postType.enum';
 import { postStatus } from '../enums/postStatus.enum';
@@ -22,6 +23,7 @@ export class CreatePostDto {
   })
   @IsString()
   @MinLength(5)
+  @MaxLength(512)
   @IsNotEmpty()
   title: string;
 
@@ -42,6 +44,7 @@ export class CreatePostDto {
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: 'A slug should be all lower case and contain hyphens (kebab-case)',
   })
+  @MaxLength(256)
   slug: string;
 
   @ApiProperty({
@@ -76,6 +79,7 @@ export class CreatePostDto {
   @IsString()
   @IsOptional()
   @IsUrl()
+  @MaxLength(1024)
   featuredImageUrl?: string;
 
   @ApiPropertyOptional({
